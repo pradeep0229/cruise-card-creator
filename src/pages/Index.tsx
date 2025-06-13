@@ -91,16 +91,16 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 via-pink-25 to-rose-50 virgin-pattern">
-      {/* Floating Virgin Voyages elements */}
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-25 to-teal-50 wave-pattern">
+      {/* Floating nautical elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 text-red-200/30 animate-bounce">
+        <div className="absolute top-20 left-10 text-blue-200/30 animate-bounce">
           <Anchor size={32} />
         </div>
-        <div className="absolute top-40 right-20 text-pink-200/30 animate-pulse">
+        <div className="absolute top-40 right-20 text-cyan-200/30 animate-pulse">
           <Ship size={28} />
         </div>
-        <div className="absolute bottom-32 left-1/4 text-rose-200/30 animate-bounce delay-1000">
+        <div className="absolute bottom-32 left-1/4 text-teal-200/30 animate-bounce delay-1000">
           <Waves size={24} />
         </div>
       </div>
@@ -109,30 +109,30 @@ const Index = () => {
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Ship className="h-8 w-8 text-primary" />
-            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-pink-600 to-rose-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-blue-600 to-cyan-600 bg-clip-text text-transparent">
               Postcard Voyage
             </h1>
             <Anchor className="h-8 w-8 text-primary" />
           </div>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Capture your voyage memories in style! Transform your Virgin Voyage moments into stunning AI-powered postcards. 
-            Upload your photo, share your story, and create something extraordinary.
+            Set sail on a journey of memories! Transform your travel moments into beautiful AI-powered postcards. 
+            Upload an image, share your story, and let AI create something magical.
           </p>
           <div className="flex items-center justify-center gap-2 mt-4">
-            <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-            <div className="w-2 h-2 bg-pink-500 rounded-full animate-pulse delay-200"></div>
-            <div className="w-2 h-2 bg-rose-500 rounded-full animate-pulse delay-400"></div>
+            <Waves className="h-4 w-4 text-primary animate-pulse" />
+            <Waves className="h-4 w-4 text-primary animate-pulse delay-200" />
+            <Waves className="h-4 w-4 text-primary animate-pulse delay-400" />
           </div>
         </div>
 
         <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
           {/* Input Form */}
-          <Card className="shadow-2xl border-0 virgin-card virgin-shimmer relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-pink/10"></div>
+          <Card className="shadow-2xl border-0 bg-card/90 backdrop-blur-sm ocean-shimmer relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-cyan/10"></div>
             <CardHeader className="text-center pb-6 relative z-10">
               <CardTitle className="text-2xl text-card-foreground flex items-center justify-center gap-2">
                 <Camera className="h-6 w-6 text-primary" />
-                Create Your Virgin Voyage Memory
+                Create Your Voyage Memory
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6 relative z-10">
@@ -141,7 +141,7 @@ const Index = () => {
                 <div className="space-y-2">
                   <Label htmlFor="image" className="text-sm font-medium text-card-foreground flex items-center gap-2">
                     <Ship className="h-4 w-4 text-primary" />
-                    Upload Your Voyage Memory
+                    Upload Your Travel Memory
                   </Label>
                   <ImageUpload onImageSelect={handleImageSelect} />
                   {imagePreview && (
@@ -163,7 +163,7 @@ const Index = () => {
                   </Label>
                   <Textarea
                     id="prompt"
-                    placeholder="Tell us about your Virgin Voyage adventure... What made this moment unforgettable?"
+                    placeholder="Share the story of your adventure... What made this moment special?"
                     value={textPrompt}
                     onChange={(e) => setTextPrompt(e.target.value)}
                     className="min-h-[100px] resize-none border-border focus:border-primary bg-background/80 backdrop-blur-sm"
@@ -174,11 +174,11 @@ const Index = () => {
                 <div className="space-y-2">
                   <Label htmlFor="destination" className="text-sm font-medium text-card-foreground flex items-center gap-2">
                     <Anchor className="h-4 w-4 text-primary" />
-                    Virgin Voyage Destination
+                    Cruise Destination
                   </Label>
                   <Select value={selectedDestination} onValueChange={setSelectedDestination}>
                     <SelectTrigger className="border-border focus:border-primary bg-background/80 backdrop-blur-sm">
-                      <SelectValue placeholder="🌊 Choose your Virgin Voyage" />
+                      <SelectValue placeholder="🗺️ Choose your destination" />
                     </SelectTrigger>
                     <SelectContent className="bg-background border border-border shadow-xl">
                       {cruiseDestinations.map((destination) => (
@@ -194,17 +194,17 @@ const Index = () => {
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full virgin-gradient hover:opacity-90 text-primary-foreground font-medium py-3 transition-all duration-300 shadow-lg hover:shadow-xl virgin-shimmer"
+                  className="w-full nautical-gradient hover:opacity-90 text-primary-foreground font-medium py-3 transition-all duration-300 shadow-lg hover:shadow-xl ocean-shimmer"
                 >
                   {isLoading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Crafting Your Virgin Voyage Postcard...
+                      Crafting Your Postcard...
                     </>
                   ) : (
                     <>
                       <Send className="mr-2 h-4 w-4" />
-                      Create My Virgin Voyage Memory
+                      Set Sail & Generate Postcard
                     </>
                   )}
                 </Button>

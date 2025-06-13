@@ -30,31 +30,31 @@ const PostcardPreview = ({
 
   if (isLoading) {
     return (
-      <Card className="shadow-2xl border-0 virgin-card virgin-shimmer relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-pink/10"></div>
+      <Card className="shadow-2xl border-0 bg-card/90 backdrop-blur-sm ocean-shimmer relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-cyan/10"></div>
         <CardContent className="p-12 relative z-10">
           <div className="text-center space-y-6">
             <div className="mx-auto w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center relative">
-              <div className="absolute inset-0 rounded-full virgin-gradient opacity-20 animate-pulse"></div>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-cyan/20 animate-pulse"></div>
               <Loader2 className="h-10 w-10 text-primary animate-spin relative z-10" />
             </div>
             <div>
               <h3 className="text-xl font-semibold text-card-foreground mb-2 flex items-center justify-center gap-2">
                 <Ship className="h-5 w-5 text-primary" />
-                Your Virgin Voyage is Being Crafted...
+                Your Voyage is Being Crafted...
                 <Anchor className="h-5 w-5 text-primary" />
               </h3>
               <p className="text-muted-foreground">
-                Creating your extraordinary memory
+                Our AI captain is navigating through your memories
               </p>
             </div>
             <div className="flex items-center justify-center gap-2">
-              <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
-              <div className="w-2 h-2 bg-pink-500 rounded-full animate-bounce delay-200"></div>
-              <div className="w-2 h-2 bg-rose-500 rounded-full animate-bounce delay-400"></div>
+              <Waves className="h-4 w-4 text-primary animate-bounce" />
+              <Waves className="h-4 w-4 text-primary animate-bounce delay-200" />
+              <Waves className="h-4 w-4 text-primary animate-bounce delay-400" />
             </div>
             <div className="w-full bg-muted rounded-full h-3 overflow-hidden">
-              <div className="virgin-gradient h-3 rounded-full animate-pulse w-3/4 relative">
+              <div className="voyage-gradient h-3 rounded-full animate-pulse w-3/4 relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
               </div>
             </div>
@@ -66,12 +66,12 @@ const PostcardPreview = ({
 
   if (generatedPostcard) {
     return (
-      <Card className="shadow-2xl border-0 virgin-card overflow-hidden virgin-shimmer relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-pink/10"></div>
+      <Card className="shadow-2xl border-0 bg-card/90 backdrop-blur-sm overflow-hidden ocean-shimmer relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-cyan/10"></div>
         <CardHeader className="text-center pb-4 relative z-10">
           <CardTitle className="text-2xl text-card-foreground flex items-center justify-center gap-2">
             <Sparkles className="h-6 w-6 text-yellow-500" />
-            Your Virgin Voyage Postcard
+            Your Voyage Postcard
             <Compass className="h-6 w-6 text-primary" />
           </CardTitle>
         </CardHeader>
@@ -100,10 +100,10 @@ const PostcardPreview = ({
               </div>
             </div>
           </div>
-          <div className="p-6 bg-gradient-to-r from-primary/5 to-pink/5">
+          <div className="p-6 bg-gradient-to-r from-primary/5 to-cyan/5">
             <p className="text-center text-muted-foreground text-sm flex items-center justify-center gap-2">
               <Anchor className="h-4 w-4 text-primary" />
-              ✨ Virgin Voyages • Crafted with AI
+              ✨ Crafted with AI • Ready to share your voyage!
               <Waves className="h-4 w-4 text-primary" />
             </p>
           </div>
@@ -113,22 +113,22 @@ const PostcardPreview = ({
   }
 
   return (
-    <Card className="shadow-2xl border-0 virgin-card virgin-shimmer relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-pink/10"></div>
+    <Card className="shadow-2xl border-0 bg-card/90 backdrop-blur-sm ocean-shimmer relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-cyan/10"></div>
       <CardContent className="p-12 relative z-10">
         <div className="text-center space-y-6">
           <div className="mx-auto w-20 h-20 bg-muted rounded-full flex items-center justify-center relative">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/10 to-pink/10"></div>
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/10 to-cyan/10"></div>
             <Sparkles className="h-10 w-10 text-muted-foreground relative z-10" />
           </div>
           <div>
             <h3 className="text-xl font-semibold text-card-foreground mb-2 flex items-center justify-center gap-2">
               <Ship className="h-5 w-5 text-primary" />
-              Your Virgin Voyage Preview
+              Your Postcard Preview
               <Compass className="h-5 w-5 text-primary" />
             </h3>
             <p className="text-muted-foreground">
-              Ready to create your extraordinary memory?
+              Chart your course and create your AI-powered voyage memory
             </p>
           </div>
           <div className="flex items-center justify-center gap-4 text-muted-foreground">
