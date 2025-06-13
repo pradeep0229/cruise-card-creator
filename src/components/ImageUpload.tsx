@@ -47,7 +47,7 @@ const ImageUpload = ({ onImageSelect }: ImageUploadProps) => {
 
   return (
     <div
-      className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300 cursor-pointer ocean-shimmer ${
+      className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300 cursor-pointer virgin-shimmer ${
         isDragOver 
           ? 'border-primary bg-primary/10 shadow-lg scale-[1.02]' 
           : 'border-border bg-background/50 hover:border-primary hover:bg-primary/5 hover:shadow-md'
@@ -67,14 +67,14 @@ const ImageUpload = ({ onImageSelect }: ImageUploadProps) => {
       
       <div className="space-y-4">
         <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center relative">
-          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-cyan/20"></div>
+          <div className="absolute inset-0 rounded-full virgin-gradient opacity-20"></div>
           <Upload className="h-8 w-8 text-primary relative z-10" />
         </div>
         
         <div>
           <p className="text-lg font-medium text-card-foreground flex items-center justify-center gap-2">
             <Ship className="h-4 w-4 text-primary" />
-            Drop your voyage photo here
+            Drop your Virgin Voyage photo here
             <Waves className="h-4 w-4 text-primary" />
           </p>
           <p className="text-sm text-muted-foreground mt-1">
@@ -92,7 +92,7 @@ const ImageUpload = ({ onImageSelect }: ImageUploadProps) => {
           }}
         >
           <Camera className="mr-2 h-4 w-4" />
-          Choose Your Memory
+          Choose Your Virgin Memory
         </Button>
       </div>
     </div>
