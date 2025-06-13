@@ -1,6 +1,6 @@
 
 import { useState, useRef } from 'react';
-import { Upload, Camera } from 'lucide-react';
+import { Upload, Camera, Ship, Waves } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface ImageUploadProps {
@@ -47,10 +47,10 @@ const ImageUpload = ({ onImageSelect }: ImageUploadProps) => {
 
   return (
     <div
-      className={`relative border-2 border-dashed rounded-lg p-8 text-center transition-all duration-200 cursor-pointer hover:border-blue-400 hover:bg-blue-50/50 ${
+      className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300 cursor-pointer ocean-shimmer ${
         isDragOver 
-          ? 'border-blue-500 bg-blue-50' 
-          : 'border-gray-300 bg-gray-50/50'
+          ? 'border-primary bg-primary/10 shadow-lg scale-[1.02]' 
+          : 'border-border bg-background/50 hover:border-primary hover:bg-primary/5 hover:shadow-md'
       }`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
@@ -66,30 +66,33 @@ const ImageUpload = ({ onImageSelect }: ImageUploadProps) => {
       />
       
       <div className="space-y-4">
-        <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-          <Upload className="h-8 w-8 text-blue-600" />
+        <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center relative">
+          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-cyan/20"></div>
+          <Upload className="h-8 w-8 text-primary relative z-10" />
         </div>
         
         <div>
-          <p className="text-lg font-medium text-gray-700">
-            Drop your image here, or click to browse
+          <p className="text-lg font-medium text-card-foreground flex items-center justify-center gap-2">
+            <Ship className="h-4 w-4 text-primary" />
+            Drop your voyage photo here
+            <Waves className="h-4 w-4 text-primary" />
           </p>
-          <p className="text-sm text-gray-500 mt-1">
-            Supports JPG, PNG, GIF up to 10MB
+          <p className="text-sm text-muted-foreground mt-1">
+            or click to browse • JPG, PNG, GIF up to 10MB
           </p>
         </div>
         
         <Button
           type="button"
           variant="outline"
-          className="mt-4 border-blue-300 text-blue-600 hover:bg-blue-50"
+          className="mt-4 border-primary/30 text-primary hover:bg-primary/10 hover:border-primary"
           onClick={(e) => {
             e.stopPropagation();
             openFileDialog();
           }}
         >
           <Camera className="mr-2 h-4 w-4" />
-          Choose File
+          Choose Your Memory
         </Button>
       </div>
     </div>

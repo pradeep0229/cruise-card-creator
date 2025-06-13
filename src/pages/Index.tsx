@@ -6,19 +6,19 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { Upload, Loader2, Camera, Send } from 'lucide-react';
+import { Upload, Loader2, Camera, Send, Anchor, Ship, Waves } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import ImageUpload from '@/components/ImageUpload';
 import PostcardPreview from '@/components/PostcardPreview';
 
 const cruiseDestinations = [
-  { value: 'caribbean', label: 'Caribbean' },
-  { value: 'alaska', label: 'Alaska' },
-  { value: 'mediterranean', label: 'Mediterranean' },
-  { value: 'hawaii', label: 'Hawaii' },
-  { value: 'northern-europe', label: 'Northern Europe' },
-  { value: 'asia', label: 'Asia' },
-  { value: 'south-america', label: 'South America' },
+  { value: 'caribbean', label: '🏝️ Caribbean' },
+  { value: 'alaska', label: '🏔️ Alaska' },
+  { value: 'mediterranean', label: '🏛️ Mediterranean' },
+  { value: 'hawaii', label: '🌺 Hawaii' },
+  { value: 'northern-europe', label: '🏰 Northern Europe' },
+  { value: 'asia', label: '🏯 Asia' },
+  { value: 'south-america', label: '🗿 South America' },
 ];
 
 const Index = () => {
@@ -91,33 +91,57 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-25 to-teal-50 wave-pattern">
+      {/* Floating nautical elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 text-blue-200/30 animate-bounce">
+          <Anchor size={32} />
+        </div>
+        <div className="absolute top-40 right-20 text-cyan-200/30 animate-pulse">
+          <Ship size={28} />
+        </div>
+        <div className="absolute bottom-32 left-1/4 text-teal-200/30 animate-bounce delay-1000">
+          <Waves size={24} />
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 py-8 relative z-10">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
-            Postcard Voyage
-          </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Transform your travel memories into beautiful AI-powered postcards. 
-            Upload an image, add your message, and let AI create something magical.
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Ship className="h-8 w-8 text-primary" />
+            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-blue-600 to-cyan-600 bg-clip-text text-transparent">
+              Postcard Voyage
+            </h1>
+            <Anchor className="h-8 w-8 text-primary" />
+          </div>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Set sail on a journey of memories! Transform your travel moments into beautiful AI-powered postcards. 
+            Upload an image, share your story, and let AI create something magical.
           </p>
+          <div className="flex items-center justify-center gap-2 mt-4">
+            <Waves className="h-4 w-4 text-primary animate-pulse" />
+            <Waves className="h-4 w-4 text-primary animate-pulse delay-200" />
+            <Waves className="h-4 w-4 text-primary animate-pulse delay-400" />
+          </div>
         </div>
 
         <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
           {/* Input Form */}
-          <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm">
-            <CardHeader className="text-center pb-6">
-              <CardTitle className="text-2xl text-gray-800 flex items-center justify-center gap-2">
-                <Camera className="h-6 w-6 text-blue-600" />
-                Create Your Postcard
+          <Card className="shadow-2xl border-0 bg-card/90 backdrop-blur-sm ocean-shimmer relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-cyan/10"></div>
+            <CardHeader className="text-center pb-6 relative z-10">
+              <CardTitle className="text-2xl text-card-foreground flex items-center justify-center gap-2">
+                <Camera className="h-6 w-6 text-primary" />
+                Create Your Voyage Memory
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-6 relative z-10">
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Image Upload */}
                 <div className="space-y-2">
-                  <Label htmlFor="image" className="text-sm font-medium text-gray-700">
-                    Upload Image
+                  <Label htmlFor="image" className="text-sm font-medium text-card-foreground flex items-center gap-2">
+                    <Ship className="h-4 w-4 text-primary" />
+                    Upload Your Travel Memory
                   </Label>
                   <ImageUpload onImageSelect={handleImageSelect} />
                   {imagePreview && (
@@ -125,7 +149,7 @@ const Index = () => {
                       <img
                         src={imagePreview}
                         alt="Preview"
-                        className="w-full h-32 object-cover rounded-lg border-2 border-gray-200"
+                        className="w-full h-32 object-cover rounded-lg border-2 border-primary/20 shadow-lg"
                       />
                     </div>
                   )}
@@ -133,28 +157,30 @@ const Index = () => {
 
                 {/* Text Prompt */}
                 <div className="space-y-2">
-                  <Label htmlFor="prompt" className="text-sm font-medium text-gray-700">
-                    Your Message
+                  <Label htmlFor="prompt" className="text-sm font-medium text-card-foreground flex items-center gap-2">
+                    <Waves className="h-4 w-4 text-primary" />
+                    Your Voyage Story
                   </Label>
                   <Textarea
                     id="prompt"
-                    placeholder="Describe your perfect postcard message..."
+                    placeholder="Share the story of your adventure... What made this moment special?"
                     value={textPrompt}
                     onChange={(e) => setTextPrompt(e.target.value)}
-                    className="min-h-[100px] resize-none border-gray-300 focus:border-blue-500"
+                    className="min-h-[100px] resize-none border-border focus:border-primary bg-background/80 backdrop-blur-sm"
                   />
                 </div>
 
                 {/* Destination Dropdown */}
                 <div className="space-y-2">
-                  <Label htmlFor="destination" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="destination" className="text-sm font-medium text-card-foreground flex items-center gap-2">
+                    <Anchor className="h-4 w-4 text-primary" />
                     Cruise Destination
                   </Label>
                   <Select value={selectedDestination} onValueChange={setSelectedDestination}>
-                    <SelectTrigger className="border-gray-300 focus:border-blue-500">
-                      <SelectValue placeholder="Select a destination" />
+                    <SelectTrigger className="border-border focus:border-primary bg-background/80 backdrop-blur-sm">
+                      <SelectValue placeholder="🗺️ Choose your destination" />
                     </SelectTrigger>
-                    <SelectContent className="bg-white border border-gray-200 shadow-lg">
+                    <SelectContent className="bg-background border border-border shadow-xl">
                       {cruiseDestinations.map((destination) => (
                         <SelectItem key={destination.value} value={destination.value}>
                           {destination.label}
@@ -168,17 +194,17 @@ const Index = () => {
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-medium py-3 transition-all duration-200"
+                  className="w-full nautical-gradient hover:opacity-90 text-primary-foreground font-medium py-3 transition-all duration-300 shadow-lg hover:shadow-xl ocean-shimmer"
                 >
                   {isLoading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Generating Postcard...
+                      Crafting Your Postcard...
                     </>
                   ) : (
                     <>
                       <Send className="mr-2 h-4 w-4" />
-                      Generate Postcard
+                      Set Sail & Generate Postcard
                     </>
                   )}
                 </Button>
