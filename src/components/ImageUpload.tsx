@@ -1,99 +1,59 @@
 
-import { useState, useRef } from 'react';
-import { Upload, Camera, Ship, Waves } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import React, { useCallback } from 'react';
+import { useDropzone } from 'react-dropzone';
+import { Upload, Image as ImageIcon } from 'lucide-react';
 
 interface ImageUploadProps {
   onImageSelect: (file: File) => void;
 }
 
-const ImageUpload = ({ onImageSelect }: ImageUploadProps) => {
-  const [isDragOver, setIsDragOver] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(true);
-  };
-
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(false);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(false);
-    
-    const files = e.dataTransfer.files;
-    if (files.length > 0) {
-      const file = files[0];
-      if (file.type.startsWith('image/')) {
-        onImageSelect(file);
-      }
+const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    if (acceptedFiles.length > 0) {
+      onImageSelect(acceptedFiles[0]);
     }
-  };
+  }, [onImageSelect]);
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files && files.length > 0) {
-      onImageSelect(files[0]);
-    }
-  };
-
-  const openFileDialog = () => {
-    fileInputRef.current?.click();
-  };
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      'image/jpeg': ['.jpg', '.jpeg'],
+      'image/png': ['.png'],
+      'image/webp': ['.webp']
+    },
+    multiple: false,
+    maxSize: 10 * 1024 * 1024, // 10MB
+  });
 
   return (
     <div
-      className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300 cursor-pointer ocean-shimmer ${
-        isDragOver 
-          ? 'border-primary bg-primary/10 shadow-lg scale-[1.02]' 
-          : 'border-border bg-background/50 hover:border-primary hover:bg-primary/5 hover:shadow-md'
+      {...getRootProps()}
+      className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all duration-300 ${
+        isDragActive
+          ? 'border-primary bg-primary/5 scale-105'
+          : 'border-border hover:border-primary hover:bg-primary/5'
       }`}
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
-      onClick={openFileDialog}
     >
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept="image/*"
-        onChange={handleFileSelect}
-        className="hidden"
-      />
-      
-      <div className="space-y-4">
-        <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center relative">
-          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-cyan/20"></div>
-          <Upload className="h-8 w-8 text-primary relative z-10" />
+      <input {...getInputProps()} />
+      <div className="flex flex-col items-center gap-4">
+        <div className="p-4 bg-primary/10 rounded-full">
+          {isDragActive ? (
+            <Upload className="h-8 w-8 text-primary animate-bounce" />
+          ) : (
+            <ImageIcon className="h-8 w-8 text-primary" />
+          )}
         </div>
-        
         <div>
-          <p className="text-lg font-medium text-card-foreground flex items-center justify-center gap-2">
-            <Ship className="h-4 w-4 text-primary" />
-            Drop your voyage photo here
-            <Waves className="h-4 w-4 text-primary" />
+          <p className="text-lg font-semibold text-card-foreground">
+            {isDragActive ? 'Drop your image here!' : 'Upload Travel Photo'}
           </p>
-          <p className="text-sm text-muted-foreground mt-1">
-            or click to browse • JPG, PNG, GIF up to 10MB
+          <p className="text-sm text-muted-foreground mt-2">
+            Drag & drop or click to select
+          </p>
+          <p className="text-xs text-muted-foreground mt-1">
+            PNG, JPG, WEBP up to 10MB
           </p>
         </div>
-        
-        <Button
-          type="button"
-          variant="outline"
-          className="mt-4 border-primary/30 text-primary hover:bg-primary/10 hover:border-primary"
-          onClick={(e) => {
-            e.stopPropagation();
-            openFileDialog();
-          }}
-        >
-          <Camera className="mr-2 h-4 w-4" />
-          Choose Your Memory
-        </Button>
       </div>
     </div>
   );

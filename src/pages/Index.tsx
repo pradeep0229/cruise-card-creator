@@ -161,11 +161,11 @@ const Index = () => {
                   <div className="space-y-3">
                     <Label htmlFor="prompt" className="text-lg font-semibold text-card-foreground flex items-center gap-2">
                       <Waves className="h-5 w-5 text-primary" />
-                      Your Voyage Story
+                      Prompt for Your Postcard
                     </Label>
                     <Textarea
                       id="prompt"
-                      placeholder="Share the story of your adventure... What made this moment special? Describe the emotions, the scenery, the experience that you want to capture in your postcard."
+                      placeholder="Describe what you want to see on your postcard... What message, scene, or feeling should be captured? Share your creative vision for the perfect postcard design."
                       value={textPrompt}
                       onChange={(e) => setTextPrompt(e.target.value)}
                       className="min-h-[180px] resize-none border-2 border-border focus:border-primary bg-background/80 backdrop-blur-sm text-base p-4"
