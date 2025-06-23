@@ -125,95 +125,97 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-          {/* Input Form */}
-          <Card className="shadow-2xl border-0 bg-card/90 backdrop-blur-sm ocean-shimmer relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-cyan/10"></div>
-            <CardHeader className="text-center pb-6 relative z-10">
-              <CardTitle className="text-2xl text-card-foreground flex items-center justify-center gap-2">
-                <Camera className="h-6 w-6 text-primary" />
-                Create Your Voyage Memory
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6 relative z-10">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Image Upload */}
-                <div className="space-y-2">
-                  <Label htmlFor="image" className="text-sm font-medium text-card-foreground flex items-center gap-2">
-                    <Ship className="h-4 w-4 text-primary" />
-                    Upload Your Travel Memory
-                  </Label>
-                  <ImageUpload onImageSelect={handleImageSelect} />
-                  {imagePreview && (
-                    <div className="mt-4">
-                      <img
-                        src={imagePreview}
-                        alt="Preview"
-                        className="w-full h-32 object-cover rounded-lg border-2 border-primary/20 shadow-lg"
-                      />
-                    </div>
-                  )}
-                </div>
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-5 gap-8">
+          {/* Input Form - Narrower */}
+          <div className="lg:col-span-2">
+            <Card className="shadow-2xl border-0 bg-card/90 backdrop-blur-sm ocean-shimmer relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-cyan/10"></div>
+              <CardHeader className="text-center pb-6 relative z-10">
+                <CardTitle className="text-xl text-card-foreground flex items-center justify-center gap-2">
+                  <Camera className="h-5 w-5 text-primary" />
+                  Create Your Voyage Memory
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4 relative z-10">
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Image Upload */}
+                  <div className="space-y-2">
+                    <Label htmlFor="image" className="text-sm font-medium text-card-foreground flex items-center gap-2">
+                      <Ship className="h-4 w-4 text-primary" />
+                      Upload Your Travel Memory
+                    </Label>
+                    <ImageUpload onImageSelect={handleImageSelect} />
+                    {imagePreview && (
+                      <div className="mt-4">
+                        <img
+                          src={imagePreview}
+                          alt="Preview"
+                          className="w-full h-24 object-cover rounded-lg border-2 border-primary/20 shadow-lg"
+                        />
+                      </div>
+                    )}
+                  </div>
 
-                {/* Text Prompt */}
-                <div className="space-y-2">
-                  <Label htmlFor="prompt" className="text-sm font-medium text-card-foreground flex items-center gap-2">
-                    <Waves className="h-4 w-4 text-primary" />
-                    Your Voyage Story
-                  </Label>
-                  <Textarea
-                    id="prompt"
-                    placeholder="Share the story of your adventure... What made this moment special?"
-                    value={textPrompt}
-                    onChange={(e) => setTextPrompt(e.target.value)}
-                    className="min-h-[100px] resize-none border-border focus:border-primary bg-background/80 backdrop-blur-sm"
-                  />
-                </div>
+                  {/* Text Prompt */}
+                  <div className="space-y-2">
+                    <Label htmlFor="prompt" className="text-sm font-medium text-card-foreground flex items-center gap-2">
+                      <Waves className="h-4 w-4 text-primary" />
+                      Your Voyage Story
+                    </Label>
+                    <Textarea
+                      id="prompt"
+                      placeholder="Share the story of your adventure..."
+                      value={textPrompt}
+                      onChange={(e) => setTextPrompt(e.target.value)}
+                      className="min-h-[80px] resize-none border-border focus:border-primary bg-background/80 backdrop-blur-sm text-sm"
+                    />
+                  </div>
 
-                {/* Destination Dropdown */}
-                <div className="space-y-2">
-                  <Label htmlFor="destination" className="text-sm font-medium text-card-foreground flex items-center gap-2">
-                    <Anchor className="h-4 w-4 text-primary" />
-                    Cruise Destination
-                  </Label>
-                  <Select value={selectedDestination} onValueChange={setSelectedDestination}>
-                    <SelectTrigger className="border-border focus:border-primary bg-background/80 backdrop-blur-sm">
-                      <SelectValue placeholder="🗺️ Choose your destination" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-background border border-border shadow-xl">
-                      {cruiseDestinations.map((destination) => (
-                        <SelectItem key={destination.value} value={destination.value}>
-                          {destination.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+                  {/* Destination Dropdown */}
+                  <div className="space-y-2">
+                    <Label htmlFor="destination" className="text-sm font-medium text-card-foreground flex items-center gap-2">
+                      <Anchor className="h-4 w-4 text-primary" />
+                      Cruise Destination
+                    </Label>
+                    <Select value={selectedDestination} onValueChange={setSelectedDestination}>
+                      <SelectTrigger className="border-border focus:border-primary bg-background/80 backdrop-blur-sm">
+                        <SelectValue placeholder="🗺️ Choose your destination" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-background border border-border shadow-xl">
+                        {cruiseDestinations.map((destination) => (
+                          <SelectItem key={destination.value} value={destination.value}>
+                            {destination.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-                {/* Submit Button */}
-                <Button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full nautical-gradient hover:opacity-90 text-primary-foreground font-medium py-3 transition-all duration-300 shadow-lg hover:shadow-xl ocean-shimmer"
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Crafting Your Postcard...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="mr-2 h-4 w-4" />
-                      Set Sail & Generate Postcard
-                    </>
-                  )}
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+                  {/* Submit Button */}
+                  <Button
+                    type="submit"
+                    disabled={isLoading}
+                    className="w-full nautical-gradient hover:opacity-90 text-primary-foreground font-medium py-2 transition-all duration-300 shadow-lg hover:shadow-xl ocean-shimmer"
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Crafting...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="mr-2 h-4 w-4" />
+                        Set Sail & Generate
+                      </>
+                    )}
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
 
-          {/* Preview/Result */}
-          <div className="space-y-6">
+          {/* Preview/Result - Much Wider */}
+          <div className="lg:col-span-3">
             <PostcardPreview 
               generatedPostcard={generatedPostcard} 
               isLoading={isLoading}

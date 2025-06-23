@@ -30,9 +30,9 @@ const PostcardPreview = ({
 
   if (isLoading) {
     return (
-      <Card className="shadow-2xl border-0 bg-card/90 backdrop-blur-sm ocean-shimmer relative overflow-hidden">
+      <Card className="shadow-2xl border-0 bg-card/90 backdrop-blur-sm ocean-shimmer relative overflow-hidden h-full">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-cyan/10"></div>
-        <CardContent className="p-12 relative z-10">
+        <CardContent className="p-12 relative z-10 h-full flex items-center justify-center">
           <div className="text-center space-y-6">
             <div className="mx-auto w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center relative">
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-cyan/20 animate-pulse"></div>
@@ -53,7 +53,7 @@ const PostcardPreview = ({
               <Waves className="h-4 w-4 text-primary animate-bounce delay-200" />
               <Waves className="h-4 w-4 text-primary animate-bounce delay-400" />
             </div>
-            <div className="w-full bg-muted rounded-full h-3 overflow-hidden">
+            <div className="w-full max-w-md bg-muted rounded-full h-3 overflow-hidden">
               <div className="voyage-gradient h-3 rounded-full animate-pulse w-3/4 relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
               </div>
@@ -80,23 +80,23 @@ const PostcardPreview = ({
             <img
               src={generatedPostcard}
               alt="Generated Postcard"
-              className="w-full h-64 object-cover"
+              className="w-full h-96 lg:h-[500px] object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-            <div className="absolute bottom-4 left-4 right-4 text-white">
-              <div className="flex items-center gap-2 mb-2">
-                <MapPin className="h-4 w-4" />
-                <span className="text-sm font-medium">
+            <div className="absolute bottom-6 left-6 right-6 text-white">
+              <div className="flex items-center gap-2 mb-3">
+                <MapPin className="h-5 w-5" />
+                <span className="text-lg font-medium">
                   {getDestinationLabel(selectedDestination)}
                 </span>
               </div>
-              <p className="text-sm opacity-90 line-clamp-2">
+              <p className="text-base opacity-90 line-clamp-3 max-w-2xl">
                 {textPrompt}
               </p>
             </div>
-            <div className="absolute top-4 right-4">
-              <div className="bg-white/20 backdrop-blur-sm rounded-full p-2">
-                <Ship className="h-4 w-4 text-white" />
+            <div className="absolute top-6 right-6">
+              <div className="bg-white/20 backdrop-blur-sm rounded-full p-3">
+                <Ship className="h-5 w-5 text-white" />
               </div>
             </div>
           </div>
@@ -113,9 +113,9 @@ const PostcardPreview = ({
   }
 
   return (
-    <Card className="shadow-2xl border-0 bg-card/90 backdrop-blur-sm ocean-shimmer relative overflow-hidden">
+    <Card className="shadow-2xl border-0 bg-card/90 backdrop-blur-sm ocean-shimmer relative overflow-hidden h-full">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-cyan/10"></div>
-      <CardContent className="p-12 relative z-10">
+      <CardContent className="p-12 relative z-10 h-full flex items-center justify-center">
         <div className="text-center space-y-6">
           <div className="mx-auto w-20 h-20 bg-muted rounded-full flex items-center justify-center relative">
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/10 to-cyan/10"></div>
