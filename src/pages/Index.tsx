@@ -105,7 +105,7 @@ const Index = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8 relative z-10">
+      <div className="container mx-auto px-4 py-8 relative z-10 max-w-7xl">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
@@ -115,7 +115,7 @@ const Index = () => {
             </h1>
             <Anchor className="h-8 w-8 text-primary" />
           </div>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Set sail on a journey of memories! Transform your travel moments into beautiful AI-powered postcards. 
             Upload an image, share your story, and let AI create something magical.
           </p>
@@ -126,8 +126,8 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Input Form - Full Width */}
-        <div className="max-w-4xl mx-auto mb-8">
+        {/* Input Form */}
+        <div className="mb-12">
           <Card className="shadow-2xl border-0 bg-card/90 backdrop-blur-sm ocean-shimmer relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-cyan/10"></div>
             <CardHeader className="text-center pb-6 relative z-10">
@@ -136,12 +136,12 @@ const Index = () => {
                 Create Your Voyage Memory
               </CardTitle>
             </CardHeader>
-            <CardContent className="relative z-10">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-3 gap-6">
+            <CardContent className="relative z-10 p-8">
+              <form onSubmit={handleSubmit} className="space-y-8">
+                <div className="grid lg:grid-cols-3 gap-8">
                   {/* Image Upload */}
-                  <div className="space-y-2">
-                    <Label htmlFor="image" className="text-base font-medium text-card-foreground flex items-center gap-2">
+                  <div className="space-y-3">
+                    <Label htmlFor="image" className="text-lg font-semibold text-card-foreground flex items-center gap-2">
                       <Ship className="h-5 w-5 text-primary" />
                       Upload Your Travel Memory
                     </Label>
@@ -151,76 +151,85 @@ const Index = () => {
                         <img
                           src={imagePreview}
                           alt="Preview"
-                          className="w-full h-32 object-cover rounded-lg border-2 border-primary/20 shadow-lg"
+                          className="w-full h-48 object-cover rounded-lg border-2 border-primary/20 shadow-lg"
                         />
                       </div>
                     )}
                   </div>
 
                   {/* Text Prompt */}
-                  <div className="space-y-2">
-                    <Label htmlFor="prompt" className="text-base font-medium text-card-foreground flex items-center gap-2">
+                  <div className="space-y-3">
+                    <Label htmlFor="prompt" className="text-lg font-semibold text-card-foreground flex items-center gap-2">
                       <Waves className="h-5 w-5 text-primary" />
                       Your Voyage Story
                     </Label>
                     <Textarea
                       id="prompt"
-                      placeholder="Share the story of your adventure..."
+                      placeholder="Share the story of your adventure... What made this moment special? Describe the emotions, the scenery, the experience that you want to capture in your postcard."
                       value={textPrompt}
                       onChange={(e) => setTextPrompt(e.target.value)}
-                      className="min-h-[120px] resize-none border-border focus:border-primary bg-background/80 backdrop-blur-sm"
+                      className="min-h-[180px] resize-none border-2 border-border focus:border-primary bg-background/80 backdrop-blur-sm text-base p-4"
                     />
                   </div>
 
                   {/* Destination Dropdown */}
-                  <div className="space-y-2">
-                    <Label htmlFor="destination" className="text-base font-medium text-card-foreground flex items-center gap-2">
+                  <div className="space-y-3">
+                    <Label htmlFor="destination" className="text-lg font-semibold text-card-foreground flex items-center gap-2">
                       <Anchor className="h-5 w-5 text-primary" />
                       Cruise Destination
                     </Label>
                     <Select value={selectedDestination} onValueChange={setSelectedDestination}>
-                      <SelectTrigger className="border-border focus:border-primary bg-background/80 backdrop-blur-sm">
+                      <SelectTrigger className="h-12 border-2 border-border focus:border-primary bg-background/80 backdrop-blur-sm text-base">
                         <SelectValue placeholder="🗺️ Choose your destination" />
                       </SelectTrigger>
-                      <SelectContent className="bg-background border border-border shadow-xl">
+                      <SelectContent className="bg-background border-2 border-border shadow-xl">
                         {cruiseDestinations.map((destination) => (
-                          <SelectItem key={destination.value} value={destination.value}>
+                          <SelectItem key={destination.value} value={destination.value} className="text-base py-3">
                             {destination.label}
                           </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
+                    
+                    <div className="mt-4 p-4 bg-primary/5 rounded-lg border border-primary/20">
+                      <p className="text-sm text-muted-foreground">
+                        💡 <strong>Tip:</strong> Choose the destination that best matches your photo to get the most authentic postcard design.
+                      </p>
+                    </div>
                   </div>
                 </div>
 
                 {/* Submit Button */}
-                <div className="text-center pt-4">
+                <div className="text-center pt-6 border-t border-border/50">
                   <Button
                     type="submit"
-                    disabled={isLoading}
+                    disabled={isLoading || !selectedImage || !textPrompt || !selectedDestination}
                     size="lg"
-                    className="px-8 py-3 nautical-gradient hover:opacity-90 text-primary-foreground font-medium transition-all duration-300 shadow-lg hover:shadow-xl ocean-shimmer"
+                    className="px-12 py-4 h-14 nautical-gradient hover:opacity-90 text-primary-foreground font-semibold transition-all duration-300 shadow-xl hover:shadow-2xl ocean-shimmer text-lg"
                   >
                     {isLoading ? (
                       <>
-                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        <Loader2 className="mr-3 h-6 w-6 animate-spin" />
                         Crafting Your Voyage...
                       </>
                     ) : (
                       <>
-                        <Send className="mr-2 h-5 w-5" />
+                        <Send className="mr-3 h-6 w-6" />
                         Set Sail & Generate Postcard
                       </>
                     )}
                   </Button>
+                  <p className="text-sm text-muted-foreground mt-3">
+                    Your magical postcard will appear below once generated
+                  </p>
                 </div>
               </form>
             </CardContent>
           </Card>
         </div>
 
-        {/* Preview/Result - Full Width */}
-        <div className="max-w-6xl mx-auto">
+        {/* Preview/Result */}
+        <div>
           <PostcardPreview 
             generatedPostcard={generatedPostcard} 
             isLoading={isLoading}
