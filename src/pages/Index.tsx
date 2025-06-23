@@ -106,6 +106,7 @@ const Index = () => {
       </div>
 
       <div className="container mx-auto px-4 py-8 relative z-10">
+        {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Ship className="h-8 w-8 text-primary" />
@@ -125,23 +126,23 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-5 gap-8">
-          {/* Input Form - Narrower */}
-          <div className="lg:col-span-2">
-            <Card className="shadow-2xl border-0 bg-card/90 backdrop-blur-sm ocean-shimmer relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-cyan/10"></div>
-              <CardHeader className="text-center pb-6 relative z-10">
-                <CardTitle className="text-xl text-card-foreground flex items-center justify-center gap-2">
-                  <Camera className="h-5 w-5 text-primary" />
-                  Create Your Voyage Memory
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4 relative z-10">
-                <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Input Form - Full Width */}
+        <div className="max-w-4xl mx-auto mb-8">
+          <Card className="shadow-2xl border-0 bg-card/90 backdrop-blur-sm ocean-shimmer relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-cyan/10"></div>
+            <CardHeader className="text-center pb-6 relative z-10">
+              <CardTitle className="text-2xl text-card-foreground flex items-center justify-center gap-2">
+                <Camera className="h-6 w-6 text-primary" />
+                Create Your Voyage Memory
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="relative z-10">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-3 gap-6">
                   {/* Image Upload */}
                   <div className="space-y-2">
-                    <Label htmlFor="image" className="text-sm font-medium text-card-foreground flex items-center gap-2">
-                      <Ship className="h-4 w-4 text-primary" />
+                    <Label htmlFor="image" className="text-base font-medium text-card-foreground flex items-center gap-2">
+                      <Ship className="h-5 w-5 text-primary" />
                       Upload Your Travel Memory
                     </Label>
                     <ImageUpload onImageSelect={handleImageSelect} />
@@ -150,7 +151,7 @@ const Index = () => {
                         <img
                           src={imagePreview}
                           alt="Preview"
-                          className="w-full h-24 object-cover rounded-lg border-2 border-primary/20 shadow-lg"
+                          className="w-full h-32 object-cover rounded-lg border-2 border-primary/20 shadow-lg"
                         />
                       </div>
                     )}
@@ -158,8 +159,8 @@ const Index = () => {
 
                   {/* Text Prompt */}
                   <div className="space-y-2">
-                    <Label htmlFor="prompt" className="text-sm font-medium text-card-foreground flex items-center gap-2">
-                      <Waves className="h-4 w-4 text-primary" />
+                    <Label htmlFor="prompt" className="text-base font-medium text-card-foreground flex items-center gap-2">
+                      <Waves className="h-5 w-5 text-primary" />
                       Your Voyage Story
                     </Label>
                     <Textarea
@@ -167,14 +168,14 @@ const Index = () => {
                       placeholder="Share the story of your adventure..."
                       value={textPrompt}
                       onChange={(e) => setTextPrompt(e.target.value)}
-                      className="min-h-[80px] resize-none border-border focus:border-primary bg-background/80 backdrop-blur-sm text-sm"
+                      className="min-h-[120px] resize-none border-border focus:border-primary bg-background/80 backdrop-blur-sm"
                     />
                   </div>
 
                   {/* Destination Dropdown */}
                   <div className="space-y-2">
-                    <Label htmlFor="destination" className="text-sm font-medium text-card-foreground flex items-center gap-2">
-                      <Anchor className="h-4 w-4 text-primary" />
+                    <Label htmlFor="destination" className="text-base font-medium text-card-foreground flex items-center gap-2">
+                      <Anchor className="h-5 w-5 text-primary" />
                       Cruise Destination
                     </Label>
                     <Select value={selectedDestination} onValueChange={setSelectedDestination}>
@@ -190,39 +191,42 @@ const Index = () => {
                       </SelectContent>
                     </Select>
                   </div>
+                </div>
 
-                  {/* Submit Button */}
+                {/* Submit Button */}
+                <div className="text-center pt-4">
                   <Button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full nautical-gradient hover:opacity-90 text-primary-foreground font-medium py-2 transition-all duration-300 shadow-lg hover:shadow-xl ocean-shimmer"
+                    size="lg"
+                    className="px-8 py-3 nautical-gradient hover:opacity-90 text-primary-foreground font-medium transition-all duration-300 shadow-lg hover:shadow-xl ocean-shimmer"
                   >
                     {isLoading ? (
                       <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Crafting...
+                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        Crafting Your Voyage...
                       </>
                     ) : (
                       <>
-                        <Send className="mr-2 h-4 w-4" />
-                        Set Sail & Generate
+                        <Send className="mr-2 h-5 w-5" />
+                        Set Sail & Generate Postcard
                       </>
                     )}
                   </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </div>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
 
-          {/* Preview/Result - Much Wider */}
-          <div className="lg:col-span-3">
-            <PostcardPreview 
-              generatedPostcard={generatedPostcard} 
-              isLoading={isLoading}
-              selectedDestination={selectedDestination}
-              textPrompt={textPrompt}
-            />
-          </div>
+        {/* Preview/Result - Full Width */}
+        <div className="max-w-6xl mx-auto">
+          <PostcardPreview 
+            generatedPostcard={generatedPostcard} 
+            isLoading={isLoading}
+            selectedDestination={selectedDestination}
+            textPrompt={textPrompt}
+          />
         </div>
       </div>
     </div>
